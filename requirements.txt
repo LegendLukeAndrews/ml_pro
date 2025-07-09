@@ -6,4 +6,7 @@ ipykernel
 scikit-learn
 catboost
 xgboost
--e .
+dill
+#-e .
+#when you run comment the -e.
+#when not needed remove. 
