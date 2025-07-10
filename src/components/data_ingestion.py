@@ -11,6 +11,8 @@ from dataclasses import dataclass
 from src.components.data_transformation import DataTransformation
 from src.components.data_transformation import DataTransformationConfig
 
+from src.components.model_trainer import ModelTrainer
+
 @dataclass#decorator
 class DataIngestionConfig:
     train_data_path:str = os.path.join('artifacts',"train.csv")#all output files are stored in artifacts. 
@@ -49,5 +51,12 @@ class DataIngestion:
 if __name__ == '__main__':
     obj = DataIngestion()
     train_data,test_data = obj.initiate_data_ingestion()#once executed artifact folder will be created. 
+
     data_transformation  = DataTransformation()
-    data_transformation.initiate_data_transformation(train_data,test_data)
+    #data_transformation.initiate_data_transformation(train_data,test_data) # uncomment when we want to run data transformation
+    #for running model trainer - use below
+    train_arr,test_arr,_ = data_transformation.initiate_data_transformation(train_data,test_data)
+    #creating object for model trainer now below line
+    modeltrainer = ModelTrainer()
+    print(modeltrainer.initiate_model_trainer(train_arr,test_arr))
+
